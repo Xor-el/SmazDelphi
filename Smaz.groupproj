@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CB7E07B8-AAB1-43FE-8F38-B4BAFE5504CF}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Smaz\SmazDelphi.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Smaz.Tests\Smaz.Tests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SmazDelphi">
+        <MSBuild Projects="Smaz\SmazDelphi.dproj"/>
+    </Target>
+    <Target Name="SmazDelphi:Clean">
+        <MSBuild Projects="Smaz\SmazDelphi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SmazDelphi:Make">
+        <MSBuild Projects="Smaz\SmazDelphi.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Smaz_Tests">
+        <MSBuild Projects="Smaz.Tests\Smaz.Tests.dproj"/>
+    </Target>
+    <Target Name="Smaz_Tests:Clean">
+        <MSBuild Projects="Smaz.Tests\Smaz.Tests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Smaz_Tests:Make">
+        <MSBuild Projects="Smaz.Tests\Smaz.Tests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SmazDelphi;Smaz_Tests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SmazDelphi:Clean;Smaz_Tests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SmazDelphi:Make;Smaz_Tests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
