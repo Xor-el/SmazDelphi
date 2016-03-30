@@ -465,11 +465,6 @@ begin
                   Move(Input[Length(Input) - inLen - verbLen],
                     buf[bufPos], verbLen);
 
-                  // Did not use Move since it bypasses ref counting for "managed" types.
-                  { CopyArray(@buf[bufPos],
-                    @Input[Length(Input) - inLen - verbLen],
-                    TypeInfo(TArray<Byte>), verbLen); }
-
                   bufPos := bufPos + verbLen;
                 end;
               end;
@@ -542,10 +537,7 @@ begin
         buf[bufPos] := verbLen;
         Inc(bufPos);
         Move(Input[Length(Input) - inLen - verbLen], buf[bufPos], verbLen);
-
-        // Did not use Move since it bypasses ref counting for "managed" types.
-        { CopyArray(@buf[bufPos], @Input[Length(Input) - inLen - verbLen],
-          TypeInfo(TArray<Byte>), verbLen); }
+        
         bufPos := bufPos + verbLen;
       end;
 
